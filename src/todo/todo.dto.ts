@@ -8,3 +8,9 @@ export class createTodo{
     @IsNotEmpty({message: "desc must be required"})
     description:string
 }
+
+export class updateTodo{
+
+    @IsNotEmpty({message: "title must be required"})
+    title:string
+}
