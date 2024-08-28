@@ -1,6 +1,7 @@
-import { Body, Controller, Post, Get, Put, Param, Delete } from '@nestjs/common';
+import { Body, Controller, Post, Get, Put, Param, Delete, UsePipes, Query } from '@nestjs/common';
 import { AppService } from 'src/app.service';
 import { createTodo, updateTodo } from './todo.dto';
+import { TodoPipe } from './todo.pipe';
 
 @Controller('todo')
 export class TodoController {
@@ -8,6 +9,12 @@ export class TodoController {
     constructor(private appservice: AppService){}
     
     private todos =[]
+
+    @Get("user/:id/:slug")
+    // @UsePipes(TodoPipe)
+    getUserById(@Param() data, @Query('search') sea:string){
+        return { data:JSON.stringify(data), sea }
+    }
 
     @Post("/create")
     createTodo(@Body() data: createTodo){
